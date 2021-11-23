@@ -1,0 +1,48 @@
+---
+- name: Update web servers
+  hosts: all
+  remote_user: root
+
+  tasks:
+    - name: Install the latest version of Apache
+      yum:
+        name: httpd
+        state: latest
+
+- name: Install Apache >= 2.6
+  yum:
+    name: httpd>=2.6
+    state: present
+
+- name: Ensure apache is at the latest version
+  ansible.builtin.yum:
+    name: httpd
+    state: latest
+
+- name: Install a list of packages 
+    yum:
+      name:
+        - nginx
+        - postgresql
+        - postgresql-server
+    state: present
+
+- name: Update target servers to latest version
+  hosts: all
+  remote_user: root
+  tasks:
+  - name: Update all installed packages using YUM module
+    yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+      update_only: yes
+    register: yum_update_status
+
+- name: Create a new user
+  hosts: all
+  tasks: 
+    - name: 
+      user:
+        name: web_user
+        uid: 1040

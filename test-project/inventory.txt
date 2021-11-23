@@ -1,0 +1,2 @@
+target ansible_host=ansible-n1@192.168.21.132 ansible_ssh_pass=school1
+target2 ansible_host=rocky-user@192.168.21.128 ansible_ssh_pass=school1

@@ -1,0 +1,28 @@
+-
+    name: 'Create a new user'
+    hosts: all
+    become: True
+    become_method: sudo
+    tasks:
+        -
+             name: 'Create a new user'
+             user:
+                 name: devops-user
+                 password: school1
+                 uid: 1040
+        -
+             name: 'Install the latest version of Apache and MariaDB'
+             ansible.builtin.package:
+                name: 
+                yum: 
+                  - httpd
+                  - mariadb-server
+                state: latest
+        -
+             name: 'Start installed services'
+             service:
+                name: 
+                    - httpd
+                    - mariadb-server
+                state: present  
+

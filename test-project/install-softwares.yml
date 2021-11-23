@@ -1,0 +1,22 @@
+---
+- name: Install softwares
+  hosts: all
+  vars:
+     packages:
+        - name: nginx
+          required: True
+        - name: mysql
+          required: True
+        - name: apache
+          required: True
+        - name: mariadb-server
+          required: True
+
+  tasks: 
+  - name: Install ''{{ item.name }}'' on Rocky
+    yum:
+      name: ''{{ item.name }}''
+      state: present
+
+
+      loop: ''{{ packages }}''

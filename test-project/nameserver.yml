@@ -1,0 +1,10 @@
+-
+    name: 'Add name server entry if not already entered'
+    hosts: all
+    tasks:
+        -
+            register: "command_output"       
+            shell: 'cat /etc/resolv.conf'
+        -
+            shell: 'echo "nameserver 192.168.21.1" >> /etc/resolv.conf'
+            when: "command_output.stdout.find ( \"192.168.21.1\") == -1"
